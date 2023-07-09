@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MusicPlayerApp"
+           parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+<!--    The actual theme of our app which inherits from Base.Theme.MusicPlayerApp-->
+    <style name="Theme.MusicPlayerApp" parent="Base.Theme.MusicPlayerApp" />
+
+<!--    It is the theme defined for our splash screen and parent is always Theme.SplashScreen-->
+<!--    Name of our theme-->
+    <style name= "Theme.App.Starting" parent="Theme.SplashScreen">
+<!--        Background Of our Splash Screen-->
+        <item name="windowSplashScreenBackground">@color/black</item>
+<!--        ICON of Our Splash Screen-->
+        <item name = "windowSplashScreenAnimatedIcon">@drawable/baseline_library_music_24</item>
+<!--        BackgroundColorOfOurSplashScreenIcon-->
+        <item name = "windowSplashScreenIconBackgroundColor">@color/black</item>
+<!--        The activity to which we have to go back after completing splash screen-->
+        <item name = "postSplashScreenTheme">@style/Theme.MusicPlayerApp</item>
+    </style>
+</resources>
