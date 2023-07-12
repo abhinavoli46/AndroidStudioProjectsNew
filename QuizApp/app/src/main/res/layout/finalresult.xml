@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_img">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Result"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.195"
+        android:layout_margin="16dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/trophy" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hey Congratulations!"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_margin="30dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/playerNameTextView"
+            android:layout_height="wrap_content"
+            tools:text="Abhinav"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_margin="30dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/finalScoreTextView"
+            android:layout_height="wrap_content"
+            tools:text="Your score is 0 out of 9"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#4d4d4d"
+            android:textStyle="bold"
+            />
+        <Button
+            android:id="@+id/lastActivityFinishButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@color/white"
+            android:textColor="#000080"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:text="FINISH"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
