@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BoxApp</string>
+    <string name="box_one">BOX ONE</string>
+    <string name="box_two">BOX TWO</string>
+    <string name="box_3">BOX 3</string>
+    <string name="box_4">BOX 4</string>
+    <string name="box_5">BOX 5</string>
+</resources>
