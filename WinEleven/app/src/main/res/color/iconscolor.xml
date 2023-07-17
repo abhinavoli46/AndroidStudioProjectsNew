@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    ICON WIL BE RED WHEN IT IS CLICKED-->
+        <item android:color="#B50707"
+        android:state_checked="true"/>
+
+<!--    ICON WIL BE GREY WHEN IT IS NOT CLICKED-->
+        <item android:color="#857A7A"
+        android:state_checked="false" />
+
+</selector>
