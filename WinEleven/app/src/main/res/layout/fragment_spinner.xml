@@ -38,22 +38,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
                 android:text="TextView"
                 android:textColor="@color/whiteText"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/coinClickable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:src="@drawable/coin" />
 
             <TextView
-                android:id="@+id/coin"
+                android:id="@+id/coinClickableText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:fontFamily="@font/poppins_bold"
                 android:text="TextView"
                 android:textColor="@color/whiteText"
                 android:textStyle="bold" />
@@ -63,7 +65,8 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_extrabold"
             android:text="Chances Left : "
             android:textSize="24sp"
             android:textStyle="bold"
@@ -75,6 +78,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
             android:text="1"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -96,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/prizesimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/spinnerinner"
@@ -112,16 +116,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/stopper"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-            app:layout_constraintEnd_toEndOf="@+id/imageView7"
-            app:layout_constraintStart_toStartOf="@+id/imageView7"
-            app:layout_constraintTop_toTopOf="@+id/imageView7" />
+            app:layout_constraintBottom_toBottomOf="@+id/prizesimage"
+            app:layout_constraintEnd_toEndOf="@+id/prizesimage"
+            app:layout_constraintStart_toStartOf="@+id/prizesimage"
+            app:layout_constraintTop_toTopOf="@+id/prizesimage" />
 
         <Button
             android:id="@+id/spinButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:backgroundTint="@color/buttonWhite"
             android:text="SPIN"
             android:textColor="@color/blackText"
@@ -129,9 +132,9 @@
             android:textStyle="bold"
             app:cornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+            app:layout_constraintEnd_toEndOf="@+id/prizesimage"
             app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="@+id/imageView7"
+            app:layout_constraintStart_toStartOf="@+id/prizesimage"
             app:layout_constraintTop_toBottomOf="@+id/spinnerFrame"
             app:layout_constraintVertical_bias="0.0" />
 

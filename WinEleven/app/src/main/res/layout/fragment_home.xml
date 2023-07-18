@@ -37,23 +37,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
                 android:text="TextView"
                 android:textColor="@color/whiteText"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/coinClickable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:src="@drawable/coin" />
 
             <TextView
-                android:id="@+id/coin"
+                android:id="@+id/coinClickableText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="TextView"
+                android:fontFamily="@font/poppins_bold"
+                android:text="1000"
                 android:textColor="@color/whiteText"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -63,12 +65,14 @@
             android:layout_width="0dp"
             android:layout_height="54dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/textviewshape"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:text="Category"
+            android:text="Categories"
+            android:textAlignment="center"
             android:textColor="@color/whiteText"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
@@ -81,7 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

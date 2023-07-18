@@ -2,7 +2,7 @@
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android">
 <!--    ICON WIL BE RED WHEN IT IS CLICKED-->
-        <item android:color="#B50707"
+        <item android:color="#22c1c3"
         android:state_checked="true"/>
 
 <!--    ICON WIL BE GREY WHEN IT IS NOT CLICKED-->
