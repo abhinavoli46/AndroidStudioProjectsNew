@@ -12,7 +12,6 @@
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:contentDescription="@string/startimage"
         android:paddingTop="60dp"
         android:paddingBottom="60dp"
@@ -25,7 +24,7 @@
         android:id="@+id/frameLayoutStartButton"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/clicked_button_design"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
@@ -44,5 +43,34 @@
             android:textSize="@dimen/button_text_size_default"
             android:textStyle="bold" />
     </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bmiButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/circular_button_background"
+
+        android:text="BMI"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayoutStartButton"
+        app:layout_constraintStart_toStartOf="@+id/frameLayoutStartButton"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutStartButton" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="CALCULATOR"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bmiButton"
+        app:layout_constraintStart_toStartOf="@+id/bmiButton"
+        app:layout_constraintTop_toBottomOf="@+id/bmiButton"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,23 @@
 package com.example.a7minuteworkoutapp
 
+import android.app.Dialog
 import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.a7minuteworkoutapp.databinding.ActivityExerciseBinding
+import com.example.a7minuteworkoutapp.databinding.CustomDialogBoxBinding
 import java.util.Locale
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
@@ -27,7 +35,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var exerciseList : ArrayList<ExerciseModel>? = null
     private var currentExercise = -1
 
+    private var mediaPlayer : MediaPlayer? = null
 
+    private var exerciseStatusAdapter : ExerciseStatusAdapter?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //view binding
@@ -46,12 +56,39 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         //Setting timer textview to total rest time allocated
         binding?.timerForRest?.text = totalTimeForRest.toString()
         binding?.backButton?.setOnClickListener{
-            onBackPressedDispatcher.onBackPressed()
+
+            customDialogForBackButton()
+
         }
 
         //Start the activity by setting up the rest timer view
         setUpRestView()
+        setUpExerciseStatusView()
+    }
 
+
+    private fun customDialogForBackButton() {
+
+        val cusDialog = Dialog(this)
+        val dialogBinding = CustomDialogBoxBinding.inflate(this.layoutInflater)
+        cusDialog.setContentView(dialogBinding.root)
+        cusDialog.setCanceledOnTouchOutside(false)
+        cusDialog.show()
+        dialogBinding.yesButton.setOnClickListener{
+            this@ExerciseActivity.finish()
+            cusDialog.dismiss()
+        }
+        dialogBinding.noButton.setOnClickListener{
+            cusDialog.dismiss()
+        }
+
+
+    }
+
+    private fun setUpExerciseStatusView(){
+        binding?.recyclerViewContainer?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        exerciseStatusAdapter = ExerciseStatusAdapter(exerciseList!!)
+        binding?.recyclerViewContainer?.adapter = exerciseStatusAdapter
     }
 
     //Function to set up rest timer view
@@ -67,6 +104,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding?.tvNextExercise?.visibility = View.VISIBLE
         binding?.tvupcoming?.visibility = View.VISIBLE
 
+        //Sound us
+        try{
+            val soundURI = Uri.parse("android.resource://com.example.a7minuteworkoutapp/" + R.raw.press_start)
+            mediaPlayer = MediaPlayer.create(applicationContext,soundURI)
+            mediaPlayer?.isLooping = false
+            mediaPlayer?.start()
+        }
+        catch(e:Exception){
+            e.printStackTrace()
+        }
 
 
         //First check if timer is not reset before starting the activity
@@ -117,7 +164,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setRestProgressBar(){
         binding?.progressBarForRest?.progress = restProgress
 
-        restTimer = object : CountDownTimer(3000, 1000){
+        restTimer = object : CountDownTimer((totalTimeForRest*1000).toLong(), 1000){
             override fun onTick(p0: Long) {
                 //increase the rest taken every second
                 restProgress++
@@ -128,6 +175,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
             override fun onFinish() {
                 currentExercise++
+                exerciseList!![currentExercise].setisSelected(true)
+                exerciseStatusAdapter!!.notifyDataSetChanged()
                 setUpExerciseView()
             }
 
@@ -137,7 +186,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setExerciseProgressBar(){
         binding?.progressBarForExercise?.progress = exerciseProgress
 
-        exerciseTimer = object : CountDownTimer(5000, 1000){
+        exerciseTimer = object : CountDownTimer((totalTimeForExercise*1000).toLong(), 1000){
             override fun onTick(p0: Long) {
                 //increase the exercise timer every second
                 exerciseProgress++
@@ -147,14 +196,20 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
             override fun onFinish() {
+
+
                 if(currentExercise < exerciseList?.size!!-1) {
+                    exerciseList!![currentExercise].setisSelected(false)
+                    exerciseList!![currentExercise].setisCompleted(true)
+                    exerciseStatusAdapter!!.notifyDataSetChanged()
                     setUpRestView()
                 }
                     else{
+                        finish()
                         Toast.makeText(this@ExerciseActivity,
                         "Congratulations",
                         Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@ExerciseActivity,MainActivity::class.java))
+                    startActivity(Intent(this@ExerciseActivity,FinishActivity::class.java))
                 }
             }
 
@@ -177,6 +232,38 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         textToSpeech!!.speak(text,TextToSpeech.QUEUE_FLUSH,null,"")
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        if(restTimer != null){
+            restTimer?.start()
+        }
+        if(exerciseTimer != null){
+            exerciseTimer?.start()
+        }
+
+        if(mediaPlayer != null) {
+            mediaPlayer!!.start()
+        }
+    }
+    override fun onStop() {
+        super.onStop()
+        if(restTimer != null){
+            restProgress = 0
+            restTimer?.cancel()
+        }
+        if(exerciseTimer != null){
+            exerciseProgress = 0
+            exerciseTimer?.cancel()
+        }
+        if(textToSpeech!=null){
+            textToSpeech!!.stop()
+
+        }
+        if(mediaPlayer != null) {
+            mediaPlayer!!.pause()
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if(restTimer != null){
@@ -190,6 +277,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if(textToSpeech!=null){
             textToSpeech!!.stop()
             textToSpeech!!.shutdown()
+        }
+        if(mediaPlayer != null) {
+            mediaPlayer!!.stop()
         }
         binding = null
     }

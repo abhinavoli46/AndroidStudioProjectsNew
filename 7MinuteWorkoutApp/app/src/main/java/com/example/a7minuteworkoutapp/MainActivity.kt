@@ -14,13 +14,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = this.resources.getColor(R.color.black)
         setContentView(binding?.root)
-
+        binding?.bmiButton?.setOnClickListener{
+            startActivity(Intent(this,BmiActivity::class.java))
+        }
         binding?.frameLayoutStartButton?.setOnClickListener{
             val intent : Intent = Intent(this,ExerciseActivity::class.java)
             startActivity(intent)
+
+
         }
+
     }
 
     override fun onDestroy() {

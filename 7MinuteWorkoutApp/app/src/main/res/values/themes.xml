@@ -3,11 +3,23 @@
     <style name="Base.Theme.7MinuteWorkoutApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="Theme.7MinuteWorkoutApp" parent="Base.Theme.7MinuteWorkoutApp" />
+
+    <style name="Theme.7MinuteWorkoutApp" parent="Base.Theme.7MinuteWorkoutApp"
+
+        />
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
         <item name="colorControlNormal" >@color/ToolbarColor</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#ffffff</item>
+        <item name="boxStrokeWidth">2dp</item>
     </style>
 
 </resources>
