@@ -24,19 +24,18 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputWeightTextView"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         app:boxStrokeColor="@color/colorAccent"
         app:hintTextColor="@color/colorAccent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/radiogroup"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbarbmi"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarbmi"
-        >
+        app:layout_constraintStart_toStartOf="@+id/radiogroup"
+        app:layout_constraintTop_toBottomOf="@id/radiogroup">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/weightInput"
@@ -48,8 +47,71 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             tools:ignore="TouchTargetSizeCheck" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+        android:id="@+id/linearlayoutusheight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="6dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/inputWeightTextView"
+        app:layout_constraintStart_toStartOf="@id/inputWeightTextView"
+        app:layout_constraintTop_toBottomOf="@id/inputWeightTextView">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/heightInFeet"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            app:boxStrokeColor="@color/colorAccent"
+            app:hintTextColor="@color/colorAccent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/heightFeetInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Feet"
+                android:inputType="numberDecimal"
+                android:shadowColor="@color/black"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/heightInInch"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            app:boxStrokeColor="@color/colorAccent"
+            app:hintTextColor="@color/colorAccent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/heightInchInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Inch"
+                android:inputType="numberDecimal"
+                android:shadowColor="@color/black"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputHeightTextView"
@@ -57,6 +119,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:boxStrokeColor="@color/colorAccent"
         app:hintTextColor="@color/colorAccent"
@@ -163,5 +226,51 @@
         app:layout_constraintTop_toBottomOf="@+id/calculateBtn"
         app:layout_constraintVertical_bias="0.0" />
 
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/radiogroupbackground"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/toolbarbmi"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarbmi">
+
+        <RadioButton
+            android:id="@+id/rbMetricsUnits"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/unittabselector"
+            android:button="@null"
+            android:layout_weight="1"
+            android:checked="true"
+            android:textAlignment="center"
+            android:text="METRIC UNITS"
+            android:textColor="@drawable/tabtextcolorselector"
+            android:textSize="16sp"
+            android:textStyle="bold">
+
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/rbusUnits"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/unittabselector"
+            android:button="@null"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="US UNITS"
+            android:textAlignment="center"
+            android:textColor="@drawable/tabtextcolorselector"
+            android:textSize="16sp"
+            android:textStyle="bold">
+
+        </RadioButton>
+
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

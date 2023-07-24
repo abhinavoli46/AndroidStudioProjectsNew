@@ -49,14 +49,15 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="100dp"
-        android:background="@drawable/circular_button_background"
 
+        android:background="@drawable/circular_button_background"
         android:text="BMI"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/frameLayoutStartButton"
-        app:layout_constraintStart_toStartOf="@+id/frameLayoutStartButton"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayoutStartButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayoutStartButton" />
 
     <TextView
@@ -71,6 +72,36 @@
         app:layout_constraintEnd_toEndOf="@+id/bmiButton"
         app:layout_constraintStart_toStartOf="@+id/bmiButton"
         app:layout_constraintTop_toBottomOf="@+id/bmiButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/historyButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/circular_button_background"
+        android:padding="10dp"
+        android:src="@drawable/baseline_calendar_month_24"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/frameLayoutStartButton"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutStartButton" />
+
+    <TextView
+        android:id="@+id/historytv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="HISTORY"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/historyButton"
+        app:layout_constraintStart_toStartOf="@+id/historyButton"
+        app:layout_constraintTop_toBottomOf="@+id/historyButton"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

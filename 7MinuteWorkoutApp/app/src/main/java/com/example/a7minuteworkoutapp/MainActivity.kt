@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         binding?.bmiButton?.setOnClickListener{
             startActivity(Intent(this,BmiActivity::class.java))
         }
+        binding?.historyButton?.setOnClickListener{
+            startActivity(Intent(this,HistoryActivity::class.java))
+        }
         binding?.frameLayoutStartButton?.setOnClickListener{
             val intent : Intent = Intent(this,ExerciseActivity::class.java)
             startActivity(intent)
