@@ -5,49 +5,42 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.example.a7minuteworkoutapp.databinding.ActivityFinishBinding
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 
-class FinishActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+class FinishActivity : AppCompatActivity() {
     var binding:ActivityFinishBinding? = null
-    var textToSpeech:TextToSpeech?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFinishBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        textToSpeech = TextToSpeech(this,this)
-
         binding?.finishButton?.setOnClickListener{
-            speak("well done")
+
             startActivity(Intent(this@FinishActivity,MainActivity::class.java))
 
+            val historyDao = (application as WorkoutApp).db.historyDao()
+            addDateToDatabase(historyDao)
         }
     }
 
-    private fun speak(text: String) {
-        textToSpeech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"")
-    }
 
-    override fun onInit(status: Int) {
-        if(status == TextToSpeech.SUCCESS){
-            val result = textToSpeech!!.setLanguage(Locale.CHINA)
-
-            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
-                Log.e("TTS", "LANGUAGE NOT SUPPORTED")
-            }
-            else{
-                Log.e("TTS", "INITIALIZATION FAILED")
-            }
+    private fun addDateToDatabase(historyDao: HistoryDao){
+        val c = Calendar.getInstance()
+        val dateTime = c.time
+        val sdf = SimpleDateFormat("dd MMM yyyy HH:mm:ss",Locale.getDefault())
+        val date = sdf.format(dateTime)
+        lifecycleScope.launch {
+            historyDao.insert(HistoryEntity(date))
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
-        if(textToSpeech!=null){
-            textToSpeech!!.stop()
-            textToSpeech!!.shutdown()
-        }
+
         binding = null
 
     }

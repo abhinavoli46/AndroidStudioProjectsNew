@@ -3,20 +3,24 @@ package com.example.a7minuteworkoutapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.a7minuteworkoutapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var binding : ActivityMainBinding? = null
+    private var keepSplashOnScreen = true
+    private val delay = 2000L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val window = this.window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = this.resources.getColor(R.color.black)
+
         setContentView(binding?.root)
         binding?.bmiButton?.setOnClickListener{
             startActivity(Intent(this,BmiActivity::class.java))

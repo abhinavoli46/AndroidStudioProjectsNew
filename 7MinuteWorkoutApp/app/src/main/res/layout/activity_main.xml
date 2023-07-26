@@ -38,9 +38,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Start"
+            android:fontFamily="@font/roboto_bold_italic"
+            android:text="START"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/button_text_size_default"
+            android:textSize="34sp"
             android:textStyle="bold" />
     </FrameLayout>
 
@@ -51,6 +52,7 @@
         android:layout_marginTop="100dp"
 
         android:background="@drawable/circular_button_background"
+        android:fontFamily="@font/roboto_medium"
         android:text="BMI"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -64,6 +66,8 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_bold"
         android:text="CALCULATOR"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -94,6 +98,8 @@
         android:id="@+id/historytv"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_bold"
         android:text="HISTORY"
         android:textColor="@color/white"
         android:textSize="20sp"

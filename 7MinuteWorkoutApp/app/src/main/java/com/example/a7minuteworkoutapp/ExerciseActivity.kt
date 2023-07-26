@@ -23,14 +23,15 @@ import java.util.Locale
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var binding : ActivityExerciseBinding? = null
     private var textToSpeech: TextToSpeech? = null
-
+    private var remainingTimeRest : Int =0
+    private var remainingTimeExercise : Int =0
     private var restTimer : CountDownTimer? = null
     private var restProgress : Int = 0
-    private var totalTimeForRest = 3
+    private var totalTimeForRest = 10
 
     private var exerciseTimer:CountDownTimer? = null
     private var exerciseProgress:Int = 0
-    private var totalTimeForExercise = 5
+    private var totalTimeForExercise = 10
 
     private var exerciseList : ArrayList<ExerciseModel>? = null
     private var currentExercise = -1
@@ -74,6 +75,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         cusDialog.setContentView(dialogBinding.root)
         cusDialog.setCanceledOnTouchOutside(false)
         cusDialog.show()
+
         dialogBinding.yesButton.setOnClickListener{
             this@ExerciseActivity.finish()
             cusDialog.dismiss()
@@ -198,7 +200,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             override fun onFinish() {
 
 
-                if(currentExercise < exerciseList?.size!!-1) {
+                if(currentExercise < exerciseList?.size!!-1 && currentExercise >= 0) {
                     exerciseList!![currentExercise].setisSelected(false)
                     exerciseList!![currentExercise].setisCompleted(true)
                     exerciseStatusAdapter!!.notifyDataSetChanged()
@@ -263,6 +265,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             mediaPlayer!!.pause()
         }
     }
+
+
+
 
     override fun onDestroy() {
         super.onDestroy()
