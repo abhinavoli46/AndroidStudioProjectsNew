@@ -21,7 +21,7 @@ class FinishActivity : AppCompatActivity() {
         binding?.finishButton?.setOnClickListener{
 
             startActivity(Intent(this@FinishActivity,MainActivity::class.java))
-
+            finish()
             val historyDao = (application as WorkoutApp).db.historyDao()
             addDateToDatabase(historyDao)
         }
