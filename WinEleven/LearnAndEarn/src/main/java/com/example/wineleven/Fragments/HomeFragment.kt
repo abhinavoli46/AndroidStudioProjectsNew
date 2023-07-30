@@ -9,8 +9,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.wineleven.Adapter.CategoryAdapter
 import com.example.wineleven.ModelClass.CategoryModelClass
 import com.example.wineleven.R
+import com.example.wineleven.User
 import com.example.wineleven.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 
 
 class HomeFragment : Fragment() {
@@ -43,7 +51,19 @@ class HomeFragment : Fragment() {
             bottomSheetDialog.enterTransition
 
         }
+        //Getting data from database and setting name textview with the user name
+        Firebase.database.reference.child("Users").child(Firebase.auth.currentUser!!.uid)
+            .addValueEventListener(
+                object: ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var user = snapshot.getValue<User>()
+                        binding.nameTextViewFragment.text = user?.name
+                    }
 
+                    override fun onCancelled(error: DatabaseError) {}
+
+                }
+            )
         return binding.root
     }
 

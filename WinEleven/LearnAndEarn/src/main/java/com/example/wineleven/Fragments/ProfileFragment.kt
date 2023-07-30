@@ -7,7 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.wineleven.R
+import com.example.wineleven.User
 import com.example.wineleven.databinding.FragmentProfileBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 
 
 class ProfileFragment : Fragment() {
@@ -37,7 +45,22 @@ class ProfileFragment : Fragment() {
             }
 
         }
+        Firebase.database.reference.child("Users").child(Firebase.auth.currentUser!!.uid)
+            .addValueEventListener(
+                object: ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var user = snapshot.getValue<User>()
+                        binding.usernametextview.text = user?.name
+                        binding.agetextview.text = user?.name.toString()
+                        binding.emailtextview.text = user?.email
+                        binding.passwordtextview.text = user?.password
+                        binding.nameHeading.text = user?.name
+                    }
 
+                    override fun onCancelled(error: DatabaseError) {}
+
+                }
+            )
         return binding.root
     }
 

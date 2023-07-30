@@ -8,8 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.wineleven.R
+import com.example.wineleven.User
 import com.example.wineleven.databinding.FragmentSpinnerBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import java.util.Random
 import java.util.Timer
 
@@ -35,6 +43,17 @@ class SpinnerFragment : Fragment() {
             bottomSheetDialog.enterTransition
 
         }
+        //Getting data from database and setting name textview with the user name
+        Firebase.database.reference.child("Users").child(Firebase.auth.currentUser!!.uid)
+            .addValueEventListener(object: ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var user = snapshot.getValue<User>()
+                        binding.nameTextViewFragment.text = user?.name
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {}
+
+                })
         return binding.root
     }
 

@@ -32,6 +32,7 @@ class CategoryAdapter(
         holder.binding.cardViewButton.setOnClickListener{
             var intent : Intent = Intent(requireActivity,QuizActivity::class.java)
             intent.putExtra("categoryImage",datalist.categoryImage)
+            intent.putExtra("questionType",datalist.categoryText)
             requireActivity.startActivity(intent)
         }
     }

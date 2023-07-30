@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "729103576441",
+    "project_id": "learnandearn-93a66",
+    "storage_bucket": "learnandearn-93a66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729103576441:android:8a5db4a629957436b293a8",
+        "android_client_info": {
+          "package_name": "com.example.wineleven"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729103576441-4mfbjel6pbg7gmo8o6fh47kro8r7t65u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Bi4ACd59WjJgUjLHBhwW90rNfZILupE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729103576441-4mfbjel6pbg7gmo8o6fh47kro8r7t65u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
