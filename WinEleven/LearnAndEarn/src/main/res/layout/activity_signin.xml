@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundgradient"
+    tools:context=".SigninActivity">
+
+
+    <EditText
+        android:id="@+id/emailSignIn"
+        android:layout_width="350dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="240dp"
+        android:background="@color/material_dynamic_neutral100"
+        android:ems="10"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="E-Mail"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/passwordSignIn"
+        android:layout_width="350dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/material_dynamic_neutral100"
+        android:ems="10"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/emailSignIn"
+        app:layout_constraintStart_toStartOf="@+id/emailSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/emailSignIn" />
+
+    <Button
+        android:id="@+id/buttonSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#A6FFFFFF"
+        android:fontFamily="@font/poppins_bold"
+        android:text="SIGN IN"
+        android:textColor="@color/blackText"
+        android:textSize="20sp"
+        app:cornerRadius="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/passwordSignIn"
+        app:layout_constraintStart_toStartOf="@+id/passwordSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/passwordSignIn" />
+
+    <TextView
+        android:id="@+id/or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="or"
+        android:textColor="@color/buttonWhite"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/googleBtnSignUp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSignIn"
+        app:layout_constraintStart_toStartOf="@+id/buttonSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />
+
+    <TextView
+        android:id="@+id/signUpLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Sign Up ?"
+        android:textColor="@color/buttonWhite"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/googleBtnSignUp"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="@+id/googleBtnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/googleBtnSignUp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/googleBtnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/google"
+        android:drawablePadding="10dp"
+        android:padding="8dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="22dp"
+        android:text="Google"
+        android:textAllCaps="false"
+        android:textColor="@color/blackText"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSignIn"
+        app:layout_constraintStart_toStartOf="@+id/buttonSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

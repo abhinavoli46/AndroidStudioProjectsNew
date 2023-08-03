@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import java.util.Collections
 
 
 class HistoryFragment : Fragment() {
@@ -26,12 +27,28 @@ class HistoryFragment : Fragment() {
         FragmentHistoryBinding.inflate(layoutInflater)
     }
     private var historyList = ArrayList<HistoryModelClass>()
+    private lateinit var adapter : HistoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       historyList.add(HistoryModelClass("03:09","200"))
-       historyList.add(HistoryModelClass("06:59","500"))
-       historyList.add(HistoryModelClass("11:43","100"))
-       historyList.add(HistoryModelClass("12:09","500"))
+        Firebase.database.reference.child("CoinHistory").child(Firebase.auth.currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    historyList.clear()
+                    var listHistorytemp = ArrayList<HistoryModelClass>()
+                    for(datasnapshot in snapshot.children){
+                        var data = datasnapshot.getValue(HistoryModelClass::class.java)
+                        listHistorytemp.add(data!!)
+                    }
+                    Collections.reverse(listHistorytemp)
+                    historyList.addAll(listHistorytemp)
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+//                    TODO("Not yet implemented")
+                }
+
+            })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -52,7 +69,7 @@ class HistoryFragment : Fragment() {
         }
 
         //Adapter
-        val adapter = HistoryAdapter(historyList)
+        adapter = HistoryAdapter(historyList)
         binding.historyRecyclerView.adapter = adapter
         binding.historyRecyclerView.setHasFixedSize(true)
 
@@ -67,6 +84,22 @@ class HistoryFragment : Fragment() {
                     override fun onCancelled(error: DatabaseError) {}
 
                 })
+
+        Firebase.database.reference.child("WonCoins").child(Firebase.auth.currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()) {
+                        val wonCoins = snapshot.value as Long
+                        binding.coinClickableText.text = (wonCoins).toString()
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
 
         return binding.root
     }

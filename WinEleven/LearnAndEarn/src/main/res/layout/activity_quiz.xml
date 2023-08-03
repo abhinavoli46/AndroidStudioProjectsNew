@@ -12,7 +12,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:gravity="center_vertical"
@@ -84,22 +84,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins_bold"
+        android:padding="10dp"
         android:textColor="@color/whiteText"
-        app:layout_constraintEnd_toEndOf="@+id/quesHeadTv"
-        app:layout_constraintStart_toStartOf="@+id/quesHeadTv"
-        app:layout_constraintTop_toBottomOf="@+id/quesHeadTv" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quesHeadTv"
+        tools:text="rftyfjljhffgm,hjhgfdhlkjlkjkjlkj;llllljlkhlllllllllllllllllllllllljghfhgfgh" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Select One of the option"
         android:textColor="@color/whiteText"
         app:layout_constraintEnd_toEndOf="@+id/questionTextView"
         app:layout_constraintStart_toStartOf="@+id/questionTextView"
-        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/questionTextView"
+        tools:text="Select One of the option" />
 
     <Button
         android:id="@+id/optionOneButton"
@@ -163,17 +167,86 @@
         app:layout_constraintStart_toStartOf="@+id/optionThreeButton"
         app:layout_constraintTop_toBottomOf="@+id/optionThreeButton" />
 
-    <Button
-        android:id="@+id/buttonNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/buttonWhite"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Next Question"
-        android:textColor="@color/blackText"
-        app:cornerRadius="10dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/winnerLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/backgroundgradient"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optionFourButton" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:text="You got a chance to spin"
+            android:textAlignment="center"
+            android:textColor="@color/buttonWhite"
+            android:textColorHighlight="@color/buttonWhite"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/well_done_animation_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="100dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/welldoneanimation" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loserLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/backgroundgradient"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view_sorry"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/textsorry"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/sorryanimation" />
+
+        <TextView
+            android:id="@+id/textsorry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:text="Better Luck Next Time"
+            android:textAlignment="center"
+            android:textColor="@color/buttonWhite"
+            android:textColorHighlight="@color/buttonWhite"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

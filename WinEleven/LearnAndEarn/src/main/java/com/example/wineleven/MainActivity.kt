@@ -49,6 +49,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity,"Enter Correct Details",Toast.LENGTH_SHORT).show()
             }
         }
+        binding.signInLink.setOnClickListener {
+            startActivity(Intent(this,SigninActivity::class.java))
+        }
     }
 
     private fun validate(): Boolean{

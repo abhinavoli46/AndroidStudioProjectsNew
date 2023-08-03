@@ -1,14 +1,20 @@
 package com.example.wineleven.Fragments
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.wineleven.MainActivity
 import com.example.wineleven.R
 import com.example.wineleven.User
 import com.example.wineleven.databinding.FragmentProfileBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -45,13 +51,34 @@ class ProfileFragment : Fragment() {
             }
 
         }
+        binding.logoutbtn.setOnClickListener {
+            try{
+                val acct : GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireContext())
+                if(acct != null) {
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
+                    GoogleSignIn.getClient(requireContext(),gso).signOut()
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+
+                }
+//                else{
+//                    FirebaseAuth.getInstance().signOut()
+//                    startActivity(Intent(context,MainActivity::class.java))
+//                }
+
+
+            } catch ( e:Exception){
+                Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show()
+
+            }
+
+        }
         Firebase.database.reference.child("Users").child(Firebase.auth.currentUser!!.uid)
             .addValueEventListener(
                 object: ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         var user = snapshot.getValue<User>()
                         binding.usernametextview.text = user?.name
-                        binding.agetextview.text = user?.name.toString()
+                        binding.agetextview.text = user?.age.toString()
                         binding.emailtextview.text = user?.email
                         binding.passwordtextview.text = user?.password
                         binding.nameHeading.text = user?.name

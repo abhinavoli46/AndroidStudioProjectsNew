@@ -1,12 +1,20 @@
 package com.example.wineleven
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.wineleven.Fragments.WithdrawalFragment
 import com.example.wineleven.ModelClass.QuestionModel
 import com.example.wineleven.databinding.ActivityQuizBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -16,15 +24,35 @@ class QuizActivity : AppCompatActivity() {
     }
     private lateinit var questionList : ArrayList<QuestionModel>
     private var currentQuestion : Int = 0
+    var score = 0
+    var currentChance = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        Firebase.database.reference.child("PlayChance").child(Firebase.auth.currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()) {
+                        currentChance = snapshot.value as Long
+                    }
+                    else{
+                        Firebase.database.reference.child("PlayChance").child(Firebase.auth.currentUser!!.uid).setValue(currentChance)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
         var image = intent.getIntExtra("categoryImage",0)
         var catText = intent.getStringExtra("questionType")
         questionList = ArrayList<QuestionModel>()
         //Using FireStore by its instance as Firebase.firestore
         //Fetching questions according to category
-        Firebase.firestore.collection("Questions").document(catText.toString()).collection("QuestionMaths").get().addOnSuccessListener {
+        Firebase.firestore.collection("Questions").document(catText.toString()).collection("questionlist").get().addOnSuccessListener {
             questionData ->
                 questionList.clear()
                 for(data in questionData.documents) {
@@ -56,20 +84,23 @@ class QuizActivity : AppCompatActivity() {
 
         }
         binding.optionOneButton.setOnClickListener {
-            nextQuestionAndUpdateScore()
+            nextQuestionAndUpdateScore(binding.optionOneButton.text.toString())
         }
         binding.optionTwoButton.setOnClickListener {
-            nextQuestionAndUpdateScore()
+            nextQuestionAndUpdateScore(binding.optionTwoButton.text.toString())
         }
         binding.optionThreeButton.setOnClickListener {
-            nextQuestionAndUpdateScore()
+            nextQuestionAndUpdateScore(binding.optionThreeButton.text.toString())
         }
         binding.optionFourButton.setOnClickListener {
-            nextQuestionAndUpdateScore()
+            nextQuestionAndUpdateScore(binding.optionFourButton.text.toString())
         }
     }
 
-    private fun nextQuestionAndUpdateScore() {
+    private fun nextQuestionAndUpdateScore(s:String) {
+        if(s == questionList[currentQuestion].answer){
+            score += 20
+        }
         currentQuestion++
         if(currentQuestion < questionList.size)
         {
@@ -82,7 +113,15 @@ class QuizActivity : AppCompatActivity() {
         }
         else
         {
-//            TODO(When questions get over show result activity)
+            if(score >= 60) {
+                binding.winnerLayout.visibility = View.VISIBLE
+                currentChance++
+                Firebase.database.reference.child("PlayChance").child(Firebase.auth.currentUser!!.uid).setValue(currentChance)
+                startActivity(Intent(this@QuizActivity,MainActivity::class.java))
+                finish()
+            }
+            else
+                binding.loserLayout.visibility = View.VISIBLE
         }
 
     }

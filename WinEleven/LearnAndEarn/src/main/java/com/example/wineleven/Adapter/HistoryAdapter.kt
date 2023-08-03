@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wineleven.ModelClass.HistoryModelClass
 import com.example.wineleven.databinding.HistoryItemViewBinding
+import java.sql.Timestamp
+import java.util.Date
 
 class HistoryAdapter(var listHistory : ArrayList<HistoryModelClass>) : RecyclerView.Adapter<HistoryAdapter.MyHistoryViewHolder>() {
     class MyHistoryViewHolder(var binding:HistoryItemViewBinding):RecyclerView.ViewHolder(binding.root) {
@@ -20,7 +22,14 @@ class HistoryAdapter(var listHistory : ArrayList<HistoryModelClass>) : RecyclerV
     }
 
     override fun onBindViewHolder(holder: MyHistoryViewHolder, position: Int) {
-        holder.binding.timeanddate.text = listHistory[position].TimeAndDate
+        var timestamp = Timestamp(listHistory[position].TimeAndDate.toLong())
+        holder.binding.timeanddate.text = Date(timestamp.time).toString()
         holder.binding.coinHistory.text = listHistory[position].coin
+        holder.binding.creditordebit.text = if(listHistory[position].isDebit){
+            "-Debit"
+        }
+        else{
+            "+Credit"
+        }
     }
 }

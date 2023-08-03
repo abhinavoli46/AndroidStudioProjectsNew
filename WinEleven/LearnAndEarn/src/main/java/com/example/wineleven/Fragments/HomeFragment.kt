@@ -77,6 +77,22 @@ class HomeFragment : Fragment() {
         var adapter = CategoryAdapter(categoryList,requireActivity())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
+
+        Firebase.database.reference.child("WonCoins").child(Firebase.auth.currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()) {
+                        val wonCoins = snapshot.value as Long
+                        binding.coinClickableText.text = (wonCoins).toString()
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
     }
     companion object {
 
