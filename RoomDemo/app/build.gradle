@@ -34,7 +34,9 @@ android {
         jvmTarget = '1.8'
     }
     packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
+        resources {
+            excludes += ['META-INF/atomicfu.kotlin_module']
+        }
     }
     buildscript {
         ext.kotlin_version = '1.5.31'
@@ -62,7 +64,6 @@ dependencies {
     // Room components
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
-
     androidTestImplementation "androidx.room:room-testing:$roomVersion"
 
     // Lifecycle components
