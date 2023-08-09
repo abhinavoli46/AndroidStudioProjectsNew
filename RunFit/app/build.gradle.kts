@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+
     val roomversion = "2.5.2"
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")

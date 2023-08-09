@@ -22,9 +22,6 @@ import com.example.runfit.other.SortType
 import com.example.runfit.ui.ViewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
-
-
 @AndroidEntryPoint
 class RunFragment : Fragment() {
     val binding by lazy {

@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     /*
     * NavHostFragment = The area in our main activity where our fragments will be displayed.
     * navController = A controller which keeps check on transition that are performed when we click buttons present in bottom navigation view.
